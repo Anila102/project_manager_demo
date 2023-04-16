@@ -1,7 +1,7 @@
 import React,{useState} from "react";
-import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
 import SideNavbar from './components/SideNavbar'
-import Projects from './components/Projects'
+import Projects from './components/Projects/Projects'
 import Navbar from './components/Navbar'
 import { ThemeProvider } from 'styled-components';
 
