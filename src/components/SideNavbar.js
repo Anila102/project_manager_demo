@@ -1,36 +1,56 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { FaBars } from 'react-icons/fa'; import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { BsFillHouseFill, BsFillBarChartFill, BsFillPeopleFill, BsFillCalendarCheckFill, BsGrid1X2Fill } from "react-icons/bs";
 
+const theme = {
+  colors: {
+    main: '#ED8154',
+    white: '#FAFAFA',
+    black: '#000000',
+    background: '#E4E4E4',
+    grey: 'rgb(166 162 162)',
+  },
+};
+const iconStyle = {
+  marginRight: '1rem',
 
-const Nav = styled.div`
-  background-color: ${props => props.theme.colors.white};
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  height: 60px;
-  padding: 0 20px;
-`;
+};
 
-const NavTitle = styled.h1`
-  color:  ${props => props.theme.colors.black};
-  font-size: 1.5rem;
-`;
+const sideData = [
+  {
+    path: "/",
+    name: 'Projects',
+    icon: <BsGrid1X2Fill color={theme.colors.main} style={{ ...iconStyle, borderLeft: `2px solid ${theme.colors.main}` }} />,
+    status: 'active'
+  },
+  {
+    path: "/",
+    name: 'Schedule',
+    icon: <BsFillCalendarCheckFill color={theme.colors.grey} style={iconStyle} />,
+    status: 'notActive'
+  },
+  {
+    path: "/",
+    name: 'Panel',
+    icon: <BsFillPeopleFill color={theme.colors.grey} style={iconStyle} />,
+    status: 'notActive'
+  },
+  {
+    path: "/",
+    name: 'Survey',
+    icon: <BsFillBarChartFill color={theme.colors.grey} style={iconStyle} />,
+    status: 'notActive'
+  },
+]
 
-const NavIcon = styled.div`
-  color:  ${props => props.theme.colors.black};
-  font-size: 1.5rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-`;
 
 const Sidebar = styled.div`
   position: fixed;
   top: 60px;
   left: 0;
   bottom: 0;
-  width: 250px;
+  width: 200px;
   background-color: ${props => props.theme.colors.white};
   padding: 20px;
   transition: transform 0.3s ease-in-out;
@@ -38,48 +58,47 @@ const Sidebar = styled.div`
 `;
 
 const SidebarLink = styled.a`
-  display: block;
+  display: flex;
+  align-items:center;
   color:  ${props => props.theme.colors.black};
   padding: 10px;
   margin-bottom: 10px;
   text-decoration: none;
+  cursor:pointer;
+  
+  &:hover {
+
+    color: ${props => props.theme.colors.main};
+  }
+ 
+ 
 `;
 
-const MainContent = styled.div`
-margin-left: ${({ open }) => (!open ? '250px' : '0px')};
-padding: 1rem;
-transition: 350ms;
-width: ${({ open }) => (!open ? 'calc(100% - 250px)' : '100%')};
-background-color:${props => props.theme.colors.background}
-`;
-
-const App = () => {
-  const [open, setOpen] = useState(true);
-
+const SideNavbar = ({ theme, isOpen }) => {
   return (
     <>
-      <Nav >
-        
-          <NavIcon className='mr-3' onClick={() => setOpen(!open)}>
-            <FaBars />
-            <NavTitle className='mx-3' >
+
+      <Sidebar open={isOpen ? 'open' : ''}>
+        <SidebarLink to="/"> <BsFillHouseFill color={theme.colors.grey} style={iconStyle} />Home</SidebarLink>
+
+        <h6 className='mb-4'>Systems</h6>
+        {sideData.map((item, index) => (
+
           
-          My App</NavTitle>
-          </NavIcon>
-      </Nav>
-      <Sidebar open={open}>
-        <SidebarLink href="#">Link 1</SidebarLink>
-        <SidebarLink href="#">Link 2</SidebarLink>
-        <SidebarLink href="#">Link 3</SidebarLink>
-        <SidebarLink href="#">Link 4</SidebarLink>
-        <SidebarLink href="#">Link 5</SidebarLink>
+            item.status === "active" ?
+             <SidebarLink key={index} to={item.path} style={{borderLeft:`2px solid ${theme.colors.main}`, color:theme.colors.main}}> {item.icon} {item.name}</SidebarLink> 
+              
+              : 
+              <SidebarLink key={index} to={item.path}>
+            {item.icon} {item.name}</SidebarLink>
+          
+
+        ))}
+
       </Sidebar>
-      <MainContent>
-        <h2>Welcome to my app</h2>
-        <p>Here's some content...</p>
-      </MainContent>
+
     </>
   );
 };
 
-export default App;
+export default SideNavbar;
