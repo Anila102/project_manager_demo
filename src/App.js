@@ -4,7 +4,7 @@ import SideNavbar from './components/SideNavbar'
 import Projects from './components/Projects/Projects'
 import Navbar from './components/Navbar'
 import { ThemeProvider } from 'styled-components';
-
+import { createGlobalStyle } from 'styled-components';
 const theme = {
   colors: {
     main: '#ED8154',
@@ -14,7 +14,11 @@ const theme = {
     grey:'rgb(166 162 162)',
   },
 };
-
+const GlobalStyle = createGlobalStyle`
+  body {
+   background-color:${theme.colors.background}
+  }
+`;
 function App() {
   const [isOpen, setIsOpen] = useState(true);
 
@@ -27,6 +31,7 @@ function App() {
   return (
     <>
        <ThemeProvider theme={theme}>
+       <GlobalStyle />
     <Navbar theme={theme} toggleSidebar={toggleSidebar}  />
     <SideNavbar  theme={theme} isOpen={isOpen} toggleSidebar={toggleSidebar} />
     <Projects  theme={theme} isOpen={isOpen} />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import styled from 'styled-components';
 import ProjectsHeader from './ProjectsHeader';
 import Project from './Project';
@@ -15,14 +15,21 @@ background-color:${props => props.theme.colors.background}
 `;
 
 export default function Projects({isOpen,theme}) {
+  const [projectTitle, setProjectTitle] = useState([])
+
   return (
     <>
-      <MainContent isOpen={isOpen}>
-    <ProjectsHeader  isOpen={isOpen} theme={theme} />
+    <ProjectsHeader  isOpen={isOpen} theme={theme} setProjectTitle={setProjectTitle} projectTitle={projectTitle} />
+      <MainContent isOpen={isOpen} className=' d-flex justify-content-center flex-wrap' style={{}}>
 
-    
-        <Project  isOpen={isOpen} theme={theme} title={`[CODE]-[PROJECT NAME]`} />
-        <Project  isOpen={isOpen} theme={theme} title={`[CODE]-[PROJECT NAME]`} />
+    {projectTitle.map((project,index)=>{
+     return <Project index={index} key={index} isOpen={isOpen} theme={theme} title={project} setProjectTitle={setProjectTitle} projectTitle={projectTitle} />
+
+    })}
+        {/* <Project  isOpen={isOpen} theme={theme} title={`[Hardcoded]-[PROJECT NAME]`} />
+        <Project  isOpen={isOpen} theme={theme} title={`[Hardcoded]-[PROJECT NAME]`} /> */}
+        {/* <Project  isOpen={isOpen} theme={theme} title={`[CODE]-[PROJECT NAME]`} />
+        <Project  isOpen={isOpen} theme={theme} title={`[CODE]-[PROJECT NAME]`} /> */}
    
       </MainContent>
     </>
