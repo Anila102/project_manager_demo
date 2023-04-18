@@ -47,7 +47,7 @@ const sideData = [
 
 const Sidebar = styled.div`
   position: fixed;
-  top: 60px;
+  top: 50px;
   left: 0;
   bottom: 0;
   width: 200px;
