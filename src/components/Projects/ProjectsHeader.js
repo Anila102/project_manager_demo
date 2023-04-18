@@ -7,12 +7,8 @@ import { Button } from 'react-bootstrap';
 import ProjectModal from './ProjectModal';
 
 const MainContent = styled.div`
-margin-left: ${({ isOpen }) => (isOpen ? '200px' : '0px')};
-
 transition: 350ms;
 position:fixed
-height:100%
-background-color:${props => props.theme.colors.background}
 display:flex;
 justify-content:space-between;
 `;
@@ -21,8 +17,7 @@ const BreadcrumbStyle = {
     padding: '2px',
     width: '100%',
     display: 'flex',
-    justifyContent: 'space-between',
-    width:'100%'
+    justifyContent: 'flex-end',
 
 }
 const BreadcrumbItemStyle = {
@@ -46,8 +41,8 @@ export default function ProjectsHeader({ theme, isOpen }) {
         <><MainContent isOpen={isOpen}>
             <Breadcrumb style={BreadcrumbStyle}>
                 <div>
-                <Breadcrumb.Item style={BreadcrumbItemStyle} to="">Home</Breadcrumb.Item>
-                <Breadcrumb.Item style={BreadcrumbItemStyle} >Data</Breadcrumb.Item>
+                {/* <Breadcrumb.Item style={BreadcrumbItemStyle} to="">Home</Breadcrumb.Item>
+                <Breadcrumb.Item style={BreadcrumbItemStyle} >Data</Breadcrumb.Item> */}
                 </div>
             <div>
                 <Button style={ButtonStyle} onClick={handleShow}>Create a Project</Button>

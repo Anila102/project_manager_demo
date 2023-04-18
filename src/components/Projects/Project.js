@@ -3,62 +3,82 @@ import styled from 'styled-components';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import {BsTrash3,BsChevronDown} from 'react-icons/bs'
-export default function Project({title,theme}) {
-    
-const Cards = styled(Card)`
-padding:0px !important
-border:2px solid ${theme.colors.main}
-border-radius:10px
+export default function Project({title,theme, isOpen}) {
+  const MainContent = styled.div`
+  display: inline-flex;
+  flex-direction: row;
+  
+  `;
+  
+  const Cards = styled(Card)`
+    display: flex;
+    flex-direction: row;
+    padding: 0px !important;
+    border: 2px solid ${theme.colors.main};
+    border-radius: 10px;
+    max-width: 100%;
+  `;
+  
+  const Body = styled(Card.Body)`
+    padding: 0;
+    width: 100%;
 
-`;
-const Body = styled(Card.Body)`
-padding:0
-`;
-const Title = styled(Card.Title)`
-color: red;
-padding:8px 12px;
-display:flex;
-justify-content:space-between;
-font-size:1rem;
-border-bottom:1px solid ${theme.colors.main}
+  `;
+  
+  const Title = styled(Card.Title)`
+    color: red;
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+  margin:0;
+    font-size: 1rem;
+    border-bottom: 1px solid ${theme.colors.main};
+  `;
+  
+  const StyledText = styled(Card.Text)`
+    display: flex;
+    max-width: 100%;
+    justify-content: space-between;
+  `;
+  
+  const Column = styled(Card.Text)`
+    list-style: none; 
+    padding: 10px 10px;
+    flex: 1;
+    font-size: 0.75rem;
+    margin:0
+  `;
+  
+  const ListItem = styled.li`
+    padding: 3px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width:100px
+  `;
 
-`;
-const StyledText = styled(Card.Text)`
-display:flex;
-width:100%
-`;
-const Column = styled(Card.Text)`
-list-style: none; 
-padding:5px 15px;
-font-size: 0.75rem;
-`;
-
-const ListItem = styled.li`
-padding:3px 2px;
-display:flex;
-justify-content:space-between;
-align-items:center
-`;
 
   return (
     <>
-    <Cards className="col-4 mx-1 my-2">
+       <MainContent className=" m-0" isOpen={isOpen}>
+    <Cards className=" mx-1 my-2">
       <Body>
         <Title>
             {title}
-          <div className=''>
             <BsTrash3 color={theme.colors.main} />
-            </div>
         
         </Title>
         <StyledText>
          <Column>
-            <ListItem style={{fontWeight:'600px'}}>Manager:</ListItem>
-            <ListItem>Client:</ListItem>
-            <ListItem>LOI:</ListItem>
-            <ListItem>Invite | Response:</ListItem>
-            <ListItem>Completed:</ListItem>
-            <ListItem>Incidence:</ListItem>
+            <ListItem style={{fontWeight:'700'}}>Manager:</ListItem>
+            <ListItem style={{fontWeight:'700'}}>Client:</ListItem>
+            <ListItem style={{fontWeight:'700'}}>LOI:</ListItem>
+            <ListItem style={{fontWeight:'700'}}>Invite | Response:</ListItem>
+            <ListItem style={{fontWeight:'700'}}>Completed:</ListItem>
+            <ListItem style={{fontWeight:'700'}}>Incidence:</ListItem>
          </Column>
          <Column>
             <ListItem>Manager</ListItem>
@@ -68,7 +88,7 @@ align-items:center
             <ListItem>521/600</ListItem>
             <ListItem>15%/20%</ListItem>
          </Column>
-         <Column style={{borderLeft:`1px solid ${theme.colors.main}`, flexGrow:2}}>
+         <Column style={{borderLeft:`1px solid ${theme.colors.main}`, marginLeft:'20px'}}>
          <ListItem style={{color:theme.colors.main}}>Open <BsChevronDown color={theme.colors.main} /></ListItem>
             <ListItem style={{color:theme.colors.main}}>Manage  <BsChevronDown color={theme.colors.main} /></ListItem>
             <ListItem style={{color:theme.colors.main}}>Insights  <BsChevronDown color={theme.colors.main} /></ListItem>
@@ -80,7 +100,7 @@ align-items:center
       
       </Body>
     </Cards>
-  
+  </MainContent>
     </>
   )
 }
